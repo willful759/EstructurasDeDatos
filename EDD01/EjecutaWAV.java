@@ -41,7 +41,7 @@ public class EjecutaWAV {
         }catch(FileNotFoundException e) {
             throw new FileNotFoundException("file" + args[0] + "could not be found\n" + e.getMessage());
         }catch(IOException e){
-            System.out.println("A problem ocurred while reading the file\n" + e.getMessage());
+            throw new IOException("A problem ocurred while reading the file\n" + e.getMessage());
         }
     }
 
