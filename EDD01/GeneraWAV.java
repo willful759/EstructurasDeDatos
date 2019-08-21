@@ -53,18 +53,18 @@ public class GeneraWAV {
         
         String sFileExtension = nombre.split("\\.")[1];
         if(!sFileExtension.equals("wav")){
-            throw new IllegalArgumentException("Unusuported/Invalid file format:" + sFileExtension);
+            throw new IllegalArgumentException("Unusuported/Invalid file format: " + sFileExtension);
         }
 
         if(iFrecuenciaMuestreo != 44100 && iFrecuenciaMuestreo != 22050 && iFrecuenciaMuestreo != 11025 ){
-            throw new IllegalArgumentException("Invalid sample rate:" + iFrecuenciaMuestreo);
+            throw new IllegalArgumentException("Invalid sample rate: " + iFrecuenciaMuestreo);
         }
 
         if(iTiempo < 0){
-            throw new  IllegalArgumentException("Illegal time duration:" + iTiempo);
+            throw new  IllegalArgumentException("Invalid time duration: " + iTiempo);
         }
         if(iArmonico < 0){
-            throw new  IllegalArgumentException("Illegal Harmonic:" + iArmonico);
+            throw new  IllegalArgumentException("Invalid Harmonic: " + iArmonico);
         }
 
         //wait that's illegal
@@ -98,11 +98,12 @@ public class GeneraWAV {
             wavFile.write(intToBytes(Integer.reverseBytes(dataSize)));
 
             //write sine wave
+            short sample;
             byte[] data = new byte[dataSize];
-            for(int i = 0; i < dataSize; i += 2){
-                short sample =
+            for(int i = 0; i < dataSize; i += BYTES_SAMPLE){
+                sample =
                         (short)(
-                        (Short.MAX_VALUE)*Math.sin(2.0*Math.PI*iArmonico*((double)i/(2.0*(double)iFrecuenciaMuestreo)))
+                        (Short.MAX_VALUE)*Math.sin(2.0*Math.PI*iArmonico*((double)i/((double)BYTES_SAMPLE*(double)iFrecuenciaMuestreo)))
                         );
                 data[i] = (byte)(sample);
                 data[i + 1] = (byte)(sample >> 8 & 0xFF);
