@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  *
@@ -25,7 +23,9 @@ public class EjecutaWAV {
         if(args.length < 1){
             throw new IllegalArgumentException("No filename provided");
         }
-        
+
+        GeneraWAV generator = new GeneraWAV();
+
         try{
             FileReader fileReader = new FileReader(args[0]);
             BufferedReader buffReader = new BufferedReader(fileReader);
@@ -34,7 +34,7 @@ public class EjecutaWAV {
             int harmonic =  Integer.parseInt(buffReader.readLine());
             int duration = Integer.parseInt(buffReader.readLine());
 
-            GeneraWAV.escribe(name,duration,frecuency,harmonic);
+            generator.escribe(name,duration,frecuency,harmonic);
             buffReader.close();
             fileReader.close();
 
