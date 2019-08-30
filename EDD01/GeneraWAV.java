@@ -24,15 +24,15 @@ public class GeneraWAV {
 
   public GeneraWAV() {
     //disgusting
-    inicia(1,(short)1,(short)16,(short)16,(short)2);
+    inicia(16,(short)1,(short)1,(short)2,(short)16);
   }
 
   final public void inicia(int Format,short Pcm,short Channels,short Bytes_sample,short Bits_sample) {
     this.FORMAT = Format;
     this.PCM = Pcm;
     this.CHANNELS = Channels;
-    this.BYTES_SAMPLE = Bits_sample;
-    this.BITS_SAMPLE = Bytes_sample;
+    this.BYTES_SAMPLE = Bytes_sample;
+    this.BITS_SAMPLE = Bits_sample;
   }
 
   private static byte[] intToBytes(int val){
@@ -75,7 +75,7 @@ public class GeneraWAV {
       if(iTiempo < 0){
           throw new  IllegalArgumentException("Illegal time duration:" + iTiempo);
       }
-      if(iArmonico < 0){
+      if(iArmonico <= 0 || iArmonico > 22000){
           throw new  IllegalArgumentException("Illegal Harmonic:" + iArmonico);
       }
 
@@ -131,6 +131,6 @@ public class GeneraWAV {
 
   public static void main(String[] args) throws UnsupportedEncodingException, IOException{
       GeneraWAV generator = new GeneraWAV();
-      generator.escribe("test.wav",300,44100,420);
+      generator.escribe("test.wav",1,22050,10000);
   }
 }
