@@ -1,3 +1,5 @@
+package ColaDoble;
+
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -63,7 +65,6 @@ public class ColaDoble<T> implements Iterable<T> {
   }
 
   public boolean estaVacia(){return this.inicio == this.fin;}
-
   //yeet
   public int tamanyo(){return this.tamanyo;}
 
@@ -97,7 +98,7 @@ public class ColaDoble<T> implements Iterable<T> {
     this.fin = temp;
   }
 
-  public T suprimeInicio() throws NoSuchElementException {
+  public T suprimeInicio() throws NoSuchElementException{
     if(this.inicio == null){
       throw new NoSuchElementException("Cola " + this + "vacia");
     }
@@ -116,7 +117,7 @@ public class ColaDoble<T> implements Iterable<T> {
     if(this.fin == null){
       throw new NoSuchElementException("Cola " + this + " vacia");
     }
-    T res = this.inicio.item;
+    T res = this.fin.item;
     if(this.fin.anterior == null){
       this.fin = null;
     }else{
